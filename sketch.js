@@ -21,6 +21,11 @@ class Rectangle {
       this.y = -this.height;
     }
   }
+
+  // Swap the color of the rectangle
+  swapColor(newColor) {
+    this.color = newColor;
+  }
 }
 
 class Car {
@@ -108,6 +113,7 @@ let smallBlocks = [];
 let cars = [];
 let lights = [];
 let moveCars = false;
+let colorsSwapped = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -158,6 +164,35 @@ function windowResized() {
 function toggleMoveCars() {
   moveCars = !moveCars;
 }
+
+function keyPressed() {
+  if (key === ' ') {
+    swapLightColors();
+  }
+}
+
+function swapLightColors() {
+  colorsSwapped = !colorsSwapped;
+  let redColor = color(177, 61, 48);
+  let blueColor = color(66, 103, 185);
+
+  for (let light of lights) {
+    if (colorsSwapped) {
+      if (redColor.levels.toString() === light.color.levels.toString()) {
+        light.swapColor(blueColor);
+      } else if (blueColor.levels.toString() === light.color.levels.toString()) {
+        light.swapColor(redColor);
+      }
+    } else {
+      if (blueColor.levels.toString() === light.color.levels.toString()) {
+        light.swapColor(redColor);
+      } else if (redColor.levels.toString() === light.color.levels.toString()) {
+        light.swapColor(blueColor);
+      }
+    }
+  }
+}
+
 
 function createYellowBlocks() {
   yellowBlocks = [];
