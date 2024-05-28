@@ -13,12 +13,21 @@ class Rectangle {
     noStroke();
     rect(this.x, this.y, this.width, this.height);
   }
+
+  // Move the rectangle vertically by a given offset
+  move(offsetY) {
+    this.y += offsetY;
+    if (this.y > height) {
+      this.y = -this.height;
+    }
+  }
 }
 
 class Car {
   // A car is composed of several rectangles
   constructor(rectangles) {
     this.rectangles = rectangles;
+    this.originalY = rectangles[0].y; // Store the original y position to reset the car
   }
 
   // Display all rectangles that make up the car
@@ -29,12 +38,12 @@ class Car {
   }
 
   // Move the car vertically from top to bottom
-  moveVertically() {
+  moveVertically(offsetY) {
     for (let rectangle of this.rectangles) {
-      rectangle.y += 1;
+      rectangle.move(offsetY);
+      
     }
   }
-
 
 }
 
@@ -82,12 +91,17 @@ let yellowBlocks = [];
 let smallBlocks = [];
 let cars = [];
 let lights = [];
+let moveCars = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   createCars();
   createYellowBlocks();
   createLights();
+
+  let button = createButton('Move Cars');
+  button.position(10, 10);
+  button.mousePressed(toggleMoveCars);
 }
 
 function draw() {
@@ -96,6 +110,9 @@ function draw() {
   // Display all cars
   for (let car of cars) {
     car.display();
+    if (moveCars) {
+      car.moveVertically(1);
+    }
   }
 
   // Display all yellow blocks
@@ -121,6 +138,10 @@ function windowResized() {
   createCars();
   createYellowBlocks();
   createLights();
+}
+
+function toggleMoveCars() {
+  moveCars = !moveCars;
 }
 
 function createYellowBlocks() {
@@ -312,14 +333,5 @@ function createLights() {
 }
 
 // function moveCars(){
-//   let scaleFactor = min(windowWidth / 715, windowHeight / 715);
-//   // Move cars vertically and reset their position if they go off screen
-//   for (let car of cars) {
-//     car.moveVertically();
-//     for (let rectangle of car.rectangles) {
-//       if (rectangle.y > windowHeight) {
-//         rectangle.y = -rectangle.height;
-//       }
-//     }
-//   }
+//   let moveCars = 1;
 // }
