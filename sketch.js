@@ -27,7 +27,10 @@ class Car {
   // A car is composed of several rectangles
   constructor(rectangles) {
     this.rectangles = rectangles;
-    this.originalY = rectangles[0].y; // Store the original y position to reset the car
+    this.y = Math.min(...rectangles.map(rect => rect.y)); // Store the topmost y position
+    this.height = Math.max(...rectangles.map(rect => rect.y + rect.height)) - this.y; // Calculate the car's height
+
+
   }
 
   // Display all rectangles that make up the car
@@ -39,11 +42,23 @@ class Car {
 
   // Move the car vertically from top to bottom
   moveVertically(offsetY) {
+    this.y += offsetY;
     for (let rectangle of this.rectangles) {
-      rectangle.move(offsetY);
-      
+      rectangle.y += offsetY;
+    }
+    if (this.y > height) {
+      this.resetPosition();
     }
   }
+
+// Reset the car's position to the top
+resetPosition() {
+  let offsetY = this.y - height;
+  for (let rectangle of this.rectangles) {
+    rectangle.y -= (height + this.height);
+  }
+  this.y -= (height + this.height);
+}
 
 }
 
@@ -306,11 +321,11 @@ function createLights() {
   let rect9 = new Rectangle(108 * scaleFactor, 30 * scaleFactor, 35 * scaleFactor, 85 * scaleFactor, 177, 61, 48);
   let rect10 = new Rectangle(650 * scaleFactor, 350 * scaleFactor, 20 * scaleFactor, 36 * scaleFactor, 177, 61, 48);
   //grey lights
-  let rect11 = new Rectangle(110 * scaleFactor, 200* scaleFactor, 30 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
-  let rect12 = new Rectangle(115 * scaleFactor, 275* scaleFactor, 20 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
-  let rect13 = new Rectangle(290 * scaleFactor, 310* scaleFactor, 50 * scaleFactor, 15 * scaleFactor, 216, 216, 212);
-  let rect14 = new Rectangle(108 * scaleFactor, 70* scaleFactor, 35 * scaleFactor, 15 * scaleFactor, 216, 216, 212);
-  let rect15 = new Rectangle(120 * scaleFactor, 570* scaleFactor, 20 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
+  let rect11 = new Rectangle(110 * scaleFactor, 200 * scaleFactor, 30 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
+  let rect12 = new Rectangle(115 * scaleFactor, 275 * scaleFactor, 20 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
+  let rect13 = new Rectangle(290 * scaleFactor, 310 * scaleFactor, 50 * scaleFactor, 15 * scaleFactor, 216, 216, 212);
+  let rect14 = new Rectangle(108 * scaleFactor, 70 * scaleFactor, 35 * scaleFactor, 15 * scaleFactor, 216, 216, 212);
+  let rect15 = new Rectangle(120 * scaleFactor, 570 * scaleFactor, 20 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
 
 
   lights.push(rect1);
