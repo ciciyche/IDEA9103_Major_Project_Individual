@@ -46,19 +46,20 @@ class Car {
     for (let rectangle of this.rectangles) {
       rectangle.y += offsetY;
     }
-    if (this.y > height) {
-      this.resetPosition();
+    let bottomBoundary = getLowestYellowBlockBoundary();
+    if (this.y > bottomBoundary) {
+      this.resetPosition(bottomBoundary);
     }
   }
 
-// Reset the car's position to the top
-resetPosition() {
-  let offsetY = this.y - height;
-  for (let rectangle of this.rectangles) {
-    rectangle.y -= (height + this.height);
+  // Reset the car's position to the top
+  resetPosition(boundaryY) {
+    // let offsetY = this.y - boundaryY;
+    for (let rectangle of this.rectangles) {
+      rectangle.y -= (boundaryY + this.height);
+    }
+    this.y -= (boundaryY + this.height);
   }
-  this.y -= (height + this.height);
-}
 
 }
 
@@ -114,8 +115,7 @@ function setup() {
   createYellowBlocks();
   createLights();
 
-  let button = createButton('Move Cars');
-  button.position(10, 10);
+  let button = select('#move-cars-button');
   button.mousePressed(toggleMoveCars);
 }
 
@@ -126,7 +126,7 @@ function draw() {
   for (let car of cars) {
     car.display();
     if (moveCars) {
-      car.moveVertically(1);
+      car.moveVertically(2);
     }
   }
 
@@ -347,6 +347,14 @@ function createLights() {
 
 }
 
-// function moveCars(){
-//   let moveCars = 1;
-// }
+// Calculate the bottom boundary of the lowest yellow block
+function getLowestYellowBlockBoundary() {
+  let maxY = 0;
+  for (let block of yellowBlocks) {
+    let bottomY = block.y - block.h;
+    if (bottomY > maxY) {
+      maxY = bottomY;
+    }
+  }
+  return maxY;
+}

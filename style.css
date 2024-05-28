@@ -6,3 +6,22 @@ html, body {
 canvas {
   display: block;
 }
+#move-cars-button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: #d5389e; 
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 15px 32px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Get it to display inline */
+  font-size: 16px; /* Increase font size */
+  font-family: Arial, sans-serif; /* Font style */
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 15px; /* Rounded corners */
+}
+#move-cars-button:hover {
+  background-color: #223878; 
+}
