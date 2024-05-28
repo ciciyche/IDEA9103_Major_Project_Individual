@@ -7,16 +7,6 @@ class Rectangle {
     this.color = color(r, g, b);
   }
 
-  // Calculate the area of the rectangle
-  area() {
-    return this.width * this.height;
-  }
-
-  // Calculate the perimeter of the rectangle
-  perimeter() {
-    return 2 * (this.width + this.height);
-  }
-
   // Display the rectangle
   display() {
     fill(this.color);
@@ -37,6 +27,15 @@ class Car {
       rectangle.display();
     }
   }
+
+  // Move the car vertically from top to bottom
+  moveVertically() {
+    for (let rectangle of this.rectangles) {
+      rectangle.y += 1;
+    }
+  }
+
+
 }
 
 class YellowBlock {
@@ -82,11 +81,13 @@ const SMALL_BLOCK_COLORS = [
 let yellowBlocks = [];
 let smallBlocks = [];
 let cars = [];
+let lights = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   createCars();
   createYellowBlocks();
+  createLights();
 }
 
 function draw() {
@@ -106,12 +107,20 @@ function draw() {
   for (let block of smallBlocks) {
     block.display();
   }
+
+  // Display all lights
+  for (let light of lights) {
+    light.display();
+  }
+
+
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   createCars();
   createYellowBlocks();
+  createLights();
 }
 
 function createYellowBlocks() {
@@ -127,7 +136,7 @@ function createYellowBlocks() {
     { y: 405, w: 715, h: 15 },
     { y: 445, w: 715, h: 15 },
     { y: 485, w: 55, h: 15 },
-    { y: 515, w: 360, h: 15 },
+    { x: 39, y: 515, w: 360, h: 15 }, //
     { y: 555, w: 55, h: 15 },
     { y: 615, w: 715, h: 15 },
     { y: 635, w: 55, h: 15 },
@@ -258,3 +267,59 @@ function createCars() {
     cars.push(new Car(rectangles));
   }
 }
+
+
+function createLights() {
+  lights = [];
+  let scaleFactor = min(windowWidth / 715, windowHeight / 715);
+  //blue lights
+  let rect1 = new Rectangle(55 * scaleFactor, 480 * scaleFactor, 40 * scaleFactor, 40 * scaleFactor, 66, 103, 185);
+  let rect2 = new Rectangle(54 * scaleFactor, 140 * scaleFactor, 40 * scaleFactor, 40 * scaleFactor, 66, 103, 185);
+  let rect3 = new Rectangle(655 * scaleFactor, 80 * scaleFactor, 36 * scaleFactor, 25 * scaleFactor, 66, 103, 185);
+  let rect4 = new Rectangle(630 * scaleFactor, 480 * scaleFactor, 38 * scaleFactor, 42 * scaleFactor, 66, 103, 185);
+  //red lights
+  let rect5 = new Rectangle(640 * scaleFactor, 140 * scaleFactor, 40 * scaleFactor, 40 * scaleFactor, 177, 61, 48);
+  let rect6 = new Rectangle(630 * scaleFactor, 550 * scaleFactor, 38 * scaleFactor, 30 * scaleFactor, 177, 61, 48);
+  let rect7 = new Rectangle(330 * scaleFactor, 675 * scaleFactor, 40 * scaleFactor, 40 * scaleFactor, 177, 61, 48);
+  let rect8 = new Rectangle(95 * scaleFactor, 360 * scaleFactor, 60 * scaleFactor, 45 * scaleFactor, 177, 61, 48);
+  let rect9 = new Rectangle(108 * scaleFactor, 30 * scaleFactor, 35 * scaleFactor, 85 * scaleFactor, 177, 61, 48);
+  let rect10 = new Rectangle(650 * scaleFactor, 350 * scaleFactor, 20 * scaleFactor, 36 * scaleFactor, 177, 61, 48);
+  //grey lights
+  let rect11 = new Rectangle(110 * scaleFactor, 200* scaleFactor, 30 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
+  let rect12 = new Rectangle(115 * scaleFactor, 275* scaleFactor, 20 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
+  let rect13 = new Rectangle(290 * scaleFactor, 310* scaleFactor, 50 * scaleFactor, 15 * scaleFactor, 216, 216, 212);
+  let rect14 = new Rectangle(108 * scaleFactor, 70* scaleFactor, 35 * scaleFactor, 15 * scaleFactor, 216, 216, 212);
+  let rect15 = new Rectangle(120 * scaleFactor, 570* scaleFactor, 20 * scaleFactor, 20 * scaleFactor, 216, 216, 212);
+
+
+  lights.push(rect1);
+  lights.push(rect2);
+  lights.push(rect3);
+  lights.push(rect4);
+  lights.push(rect5);
+  lights.push(rect6);
+  lights.push(rect7);
+  lights.push(rect8);
+  lights.push(rect9);
+  lights.push(rect10);
+  lights.push(rect11);
+  lights.push(rect12);
+  lights.push(rect13);
+  lights.push(rect14);
+  lights.push(rect15);
+
+
+}
+
+// function moveCars(){
+//   let scaleFactor = min(windowWidth / 715, windowHeight / 715);
+//   // Move cars vertically and reset their position if they go off screen
+//   for (let car of cars) {
+//     car.moveVertically();
+//     for (let rectangle of car.rectangles) {
+//       if (rectangle.y > windowHeight) {
+//         rectangle.y = -rectangle.height;
+//       }
+//     }
+//   }
+// }
