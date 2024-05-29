@@ -140,6 +140,7 @@ let lights = [];
 let moveCars = false;
 let colorsSwapped = false;
 let snowflakes = [];
+let showSnowflakes = false;
 let backgroundColor = [242, 243, 239];
 
 
@@ -182,10 +183,12 @@ function draw() {
   for (let light of lights) {
     light.display();
   }
-  // Display and update snowflakes
-  for (let snowflake of snowflakes) {
-    snowflake.update();
-    snowflake.display();
+  /// Display and update snowflakes if showSnowflakes is true
+  if (showSnowflakes) {
+    for (let snowflake of snowflakes) {
+      snowflake.update();
+      snowflake.display();
+    }
   }
 
 
@@ -203,13 +206,11 @@ function toggleMoveCars() {
 }
 
 function keyPressed() {
-  if (key === ' ') {
-    swapLightColors();
-  }
-}
-function mousePressed() {
-  if (mouseButton === LEFT) {
+  if (key === '1') {
     backgroundColor = [34, 56, 120]; // dark blue
+    showSnowflakes = true; //snow falls
+  } else if (key === ' ') {
+    swapLightColors();
   }
 }
 
