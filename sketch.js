@@ -100,6 +100,31 @@ class SmallBlock {
     rect(this.x, this.y, this.size, this.size);
   }
 }
+class Snowflake {
+  constructor() {
+    this.x = random(width);
+    this.y = random(-height, 0);
+    this.size = random(2, 5);
+    this.speed = random(1, 3);
+  }
+
+  // Update the position of the snowflake
+  update() {
+    this.y += this.speed;
+    if (this.y > height) {
+      this.y = random(-height, 0);
+      this.x = random(width);
+    }
+  }
+
+  // Display the snowflake
+  display() {
+    fill(255);
+    noStroke();
+    ellipse(this.x, this.y, this.size, this.size);
+  }
+}
+
 
 const SMALL_BLOCK_SIZE = 12;
 const SMALL_BLOCK_COLORS = [
@@ -114,6 +139,9 @@ let cars = [];
 let lights = [];
 let moveCars = false;
 let colorsSwapped = false;
+let snowflakes = [];
+let backgroundColor = [242, 243, 239];
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -123,10 +151,14 @@ function setup() {
 
   let button = select('#move-cars-button');
   button.mousePressed(toggleMoveCars);
+  // Initialize snowflakes
+  for (let i = 0; i < 100; i++) {
+    snowflakes.push(new Snowflake());
+  }
 }
 
 function draw() {
-  background(242, 243, 239);
+  background(backgroundColor);
 
   // Display all cars
   for (let car of cars) {
@@ -150,6 +182,11 @@ function draw() {
   for (let light of lights) {
     light.display();
   }
+  // Display and update snowflakes
+  for (let snowflake of snowflakes) {
+    snowflake.update();
+    snowflake.display();
+  }
 
 
 }
@@ -170,6 +207,12 @@ function keyPressed() {
     swapLightColors();
   }
 }
+function mousePressed() {
+  if (mouseButton === LEFT) {
+    backgroundColor = [34, 56, 120]; // dark blue
+  }
+}
+
 
 function swapLightColors() {
   colorsSwapped = !colorsSwapped;
