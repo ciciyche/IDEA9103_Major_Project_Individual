@@ -46,3 +46,12 @@ The vertical movement of cars on the canvas provides a visual representation of 
 - Interactive Light Color Swap:
 The ability to swap light colors with the spacebar introduces an element of user control and interaction, making the scene more engaging. This specific color change mechanism adds a distinct visual variation that is not present in the other animations focused on randomness and perlin noise.
 
+#### Integration with Other Group Members' Work:
+- Perlin Noise and Randomness:
+
+  - One group member uses perlin noise and randomness to animate points moving from bottom to top, transforming the image into randomly sized colored points to represent the city's transition from morning to evening. This approach emphasizes the natural and organic flow of the city, distinct from the more structured animations of cars and lights in this part.
+  
+- Audio-Driven Animation:
+
+  - Another group member incorporates audio technology to create a music player effect. In their work, cars move to the rhythm, lights become breathing lights changing colors with the rhythm, and clicking on the lights adds drum beats to jazz music. This adds a musical and rhythmic dimension to the project, providing a sensory experience that complements the visual animations.
+
