@@ -50,8 +50,17 @@ The ability to swap light colors with the spacebar introduces an element of user
 - Perlin Noise and Randomness:
 
   - One group member uses perlin noise and randomness to animate points moving from bottom to top, transforming the image into randomly sized colored points to represent the city's transition from morning to evening. This approach emphasizes the natural and organic flow of the city, distinct from the more structured animations of cars and lights in this part.
-  
+
 - Audio-Driven Animation:
 
   - Another group member incorporates audio technology to create a music player effect. In their work, cars move to the rhythm, lights become breathing lights changing colors with the rhythm, and clicking on the lights adds drum beats to jazz music. This adds a musical and rhythmic dimension to the project, providing a sensory experience that complements the visual animations.
 
+### Reference of Codes
+
+1.[move](https://p5js.org/reference/#/p5.Camera/move)
+
+2.[swapColor（）](https://chatgpt.com)provided by ChatGPT
+
+3.[button](https://p5js.org/reference/#/p5/createButton)
+
+4.[update()](https://gamedev.stackexchange.com/questions/102534/how-to-create-a-update-function-in-java)
